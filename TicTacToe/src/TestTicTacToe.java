@@ -8,4 +8,5 @@ public class TestTicTacToe
 	private int zeilen = 0;
 	private int spalten = 0;
 	private String testGIT = "Commit";
+	private String beautifulCommit = "Beautiful Commit";
 }
