@@ -1,0 +1,52 @@
+<?xml version = "1.0"?>
+<project name = "TicTacToe" default = "build_jar">
+	<property file = "build.properties"/>
+	<property name = "src.dir" value = "src"/>
+	<property name = "build.dir" value = "build"/>
+	<property name = "build_jar.dir" value = "build_jar"/>
+	<property name = "name" value = "TicTacToe"/>
+	
+	<target name = "info">
+      	<echo>Ant for TicTacToe</echo>
+      	<echo>wawalkenhorst</echo>
+   		<tstamp>
+			<format property="HEUTE_DE" pattern="dd.MM.yyyy HH:mm:ss:sss zzz" locale="de,DE"/>
+		</tstamp>
+		<echo>Build Datum ${HEUTE_DE}</echo>
+		   
+		<echo>Apache Ant Version:	${ant.version}</echo>
+		<echo>Webseite 			:	${sitename}</echo>
+   	</target>
+	
+	<target name = "clean" description = "Clean output directories" depends="info">
+		<echo>Delete successful</echo>
+		<delete>
+			<fileset dir = "${build.dir}">
+			<include name = "**/*.class"/>
+			</fileset>
+		</delete>
+	</target>
+	
+	   <target name = "build" description = "Compile source tree java files" depends="clean">
+			<echo>Build successful</echo>
+			<mkdir dir = "${build.dir}"/>
+	      
+			<javac destdir = "${build.dir}" source = "1.8" target = "1.8">
+<!--			<javac destdir = "${build.dir}" source = "1.5" target = "1.5"> -->
+			<src path = "${src.dir}"/>
+
+	      </javac>
+	   </target>
+
+		<target name = "build-jar" depends="build">
+			<jar destfile = "${build_jar.dir}/lib/util.jar"
+				basedir = "${build.dir}/classes"
+				includes = "tictactor/util/**"
+				excludes = "**/Test.class">
+			 
+				<manifest>
+					<attribute name = "Main-Class" value = "de.walkenhorst.tictactoe"/>
+				</manifest>
+			</jar>
+		</target>
+</project>
